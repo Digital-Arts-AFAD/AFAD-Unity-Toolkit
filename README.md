@@ -1,7 +1,11 @@
 # AFAD Unity Toolkit
-Designed for visual artists and digital storytellers without any programming skills, this set of scripts and prefabs covers the the most common use cases in interactive 3D virtual environments in Unity.
+AFAD Unity Toolkit contains scripts and helpers to get you quickly started with your own interactive 3D virtual environments in Unity without any coding skills necessary. Just drag and drop and click. 
 
-### What can be created with the toolkit:
+The toolkit was developed for the course Video games and Virtual Environments, as part of the Digital Arts program at the Academy of Fine Arts an Design (AFAD) in Bratislava.
+
+Designed for visual artists and digital storytellers, the toolkit covers the most frequent situations in interactive 3D virtual environments in Unity. The philosophy of the toolkit is to have a simple starting package for digital artists. It doesn't offer the complexity and richness of industry-grade game creator packages but it is much easier to learn and use.
+
+### Typical applications for the toolkit:
 - Walking simulators
 - Interactive experiences
 - Environmental storytelling
@@ -10,10 +14,36 @@ Designed for visual artists and digital storytellers without any programming ski
 ### Not included in the toolkit:
 - Dialogue system
 - Inventory system
-- Character controller
+- Character controllers
+
+## Features
+
+- Crosshair and action message
+- Drag-n-drop components for area triggers, collision events, mouse events, video player events
+- Pickable and interactable objects
+- Switch for on and off actions
+- Timer for timed actions
+- Level loading (both simple and additive)
+- Object spawner and destroyer
+- Collectible object
+- Various utitlites
+    - Screen fader
+    - Procedural rotator
+    - Detection of inactivity
+    - Player of random sounds
+
+
+## Requirements
+- Unity 6
+    - Recommended version 6000.6 and higher
+- TextMeshPro
+    - Automatic prompt to install pops up after the toolkit is imported into project     
+- Character controller.
+    - Tested with Unity's starter assets [First Person + Third Person Character Controllers](https://assetstore.unity.com/packages/3d/characters/first-person-third-person-character-controllers-196526)
 
 ## Installation
-Download the `.unitypackage` from Releases and import into your project.
+Download the latest `.unitypackage` from Releases and import into your Unity project.
 
 ## Documentation
-... tbc
+Documentation for a previous generation of the toolkit: [AFAD Unity Package](https://vyuka.digitalneumenia.sk/afad-unity-package).  
+The older documentation is 90% consistent with the current toolkit. An updated documentation is in progress.

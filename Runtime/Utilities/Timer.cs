@@ -16,7 +16,7 @@ namespace DigitalArtsAFAD
 
         [Header("Repeated firing")]
         [Space(5)]
-        public int repeatCount = 0;
+        public int repeatCount = 1;
         public float endTime = 0;
 
         [Header("Random delay")]
