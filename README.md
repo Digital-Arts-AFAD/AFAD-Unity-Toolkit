@@ -42,7 +42,7 @@ Designed for visual artists and digital storytellers, the toolkit covers the mos
     - Tested with Unity's starter assets [First Person + Third Person Character Controllers](https://assetstore.unity.com/packages/3d/characters/first-person-third-person-character-controllers-196526)
 
 ## Installation
-Download the latest `.unitypackage` from Releases and import into your Unity project.
+Download the [latest `.unitypackage` from Releases](https://github.com/Digital-Arts-AFAD/AFAD-Unity-Toolkit/releases/latest) and import into your Unity project.
 
 ## Documentation
 Documentation for a previous generation of the toolkit: [AFAD Unity Package](https://vyuka.digitalneumenia.sk/afad-unity-package).  
