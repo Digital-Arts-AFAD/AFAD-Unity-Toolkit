@@ -1,4 +1,6 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace DigitalArtsAFAD
@@ -8,6 +10,17 @@ namespace DigitalArtsAFAD
         public string dropMessage = "Drop";
         public string throwMessage = "Throw";
         public bool throwable = false;
+
+        [Header("Specific events")]
+        [Space(10)]
+        [Tooltip("Called when player picks up the object")]
+        public UnityEvent<PlayerBase> OnPickUp;
+        [Tooltip("Called when player drops the object")]
+        public UnityEvent<PlayerBase> OnDrop;
+        [Tooltip("Called when player throws the object")]
+        public UnityEvent<PlayerBase> OnThrow;
+
+
 
         bool picked = false;
         bool throwing = false;
@@ -64,6 +77,7 @@ namespace DigitalArtsAFAD
             {
                 picked = true;
                 player3D.SetForcedInteractable(this);
+                OnPickUp.Invoke(player);
 
                 // remember original hierarchy
                 oldScene = gameObject.scene;
@@ -95,6 +109,16 @@ namespace DigitalArtsAFAD
                     SceneManager.MoveGameObjectToScene(gameObject, oldScene);
 
                 message = oldMessage;
+
+                if (throwable && throwing)
+                {
+                    OnThrow.Invoke(player);
+
+                }
+                else
+                {
+                    OnDrop.Invoke(player);
+                }
 
                 if (rb)
                 {
