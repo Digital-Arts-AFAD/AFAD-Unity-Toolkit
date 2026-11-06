@@ -18,26 +18,25 @@ Designed for visual artists and digital storytellers, the toolkit covers the mos
 
 ## Features
 
-- Crosshair and action message
-- Drag-n-drop components for area triggers, collision events, mouse events, video player events
+- Interaction crosshair and action message
+- Components for area triggers, collision events, mouse events, video player events
 - Pickable and interactable objects
-- Switch for on and off actions
+- Switch for on/off actions
 - Timer for timed actions
 - Level loading (both simple and additive)
 - Object spawner and destroyer
-- Collectible object
-- Various utitlites
+- Collectible objects
+- Various utilities
     - Screen fader
     - Procedural rotator
-    - Detection of inactivity
+    - Detection of inactivity (Idle timer)
     - Player of random sounds
-
 
 ## Requirements
 - Unity 6
     - Recommended version 6000.6 and higher
 - TextMeshPro
-    - Automatic prompt to install pops up after the toolkit is imported into project     
+    - Automatic prompt to install TextMeshPro will pop up when first used
 - Character controller.
     - Tested with Unity's starter assets [First Person + Third Person Character Controllers](https://assetstore.unity.com/packages/3d/characters/first-person-third-person-character-controllers-196526)
 
