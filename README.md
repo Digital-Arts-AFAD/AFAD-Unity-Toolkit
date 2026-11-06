@@ -1,7 +1,7 @@
 # AFAD Unity Toolkit
 AFAD Unity Toolkit contains scripts and helpers to get you quickly started with your own interactive 3D virtual environments in Unity without any coding skills necessary. Just drag and drop and click. 
 
-The toolkit was developed for the course Video games and Virtual Environments, as part of the Digital Arts program at the Academy of Fine Arts an Design (AFAD) in Bratislava.
+The toolkit was developed for the course Video games and Virtual Environments, as part of the [Digital Arts program at the Academy of Fine Arts an Design (AFAD) in Bratislava.](https://www.digitalneumenia.sk)
 
 Designed for visual artists and digital storytellers, the toolkit covers the most frequent situations in interactive 3D virtual environments in Unity. The philosophy of the toolkit is to have a simple starting package for digital artists. It doesn't offer the complexity and richness of industry-grade game creator packages but it is much easier to learn and use.
 
