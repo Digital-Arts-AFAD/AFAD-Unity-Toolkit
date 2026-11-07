@@ -6,22 +6,23 @@ using UnityEngine.Video;
 public class VideoEvents : MonoBehaviour
 {
     [Tooltip("Reference to the monitored video player.")]
-    public VideoPlayer player;
+    public VideoPlayer videoPlayer;
 
+    [Space(5)]
     public UnityEvent onStarted, onFinished;
 
     private void Start()
     {
-        if (player != null)
+        if (videoPlayer != null)
         {
-            player.started += Player_started;
-            player.loopPointReached += Player_loopPointReached;
+            videoPlayer.started += Player_started;
+            videoPlayer.loopPointReached += Player_loopPointReached;
         }
     }
 
     private void Update()
     {
-        double pos = player.time;
+        double pos = videoPlayer.time;
     }
 
     private void Player_loopPointReached(VideoPlayer source)
