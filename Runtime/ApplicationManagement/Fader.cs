@@ -131,6 +131,11 @@ namespace DigitalArtsAFAD
             FadeOut();
         }
 
+        /// <summary>
+        /// Sets color to the end of fade out. Used e.g. when additive loading the first scene 
+        /// and the fader needs to be filled with color because fade in doesn't start
+        /// until the scene finished loading. Without Fill(), the world would be empty and visible.
+        /// </summary>
         public void Fill()
         {
             image.color = fadeOutEnd;
