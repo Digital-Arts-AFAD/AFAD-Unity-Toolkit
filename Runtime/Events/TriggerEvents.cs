@@ -16,6 +16,7 @@ namespace DigitalArtsAFAD
         public UnityEvent onLeave;
 
         bool wasEntered = false;
+        bool wasExited = false;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -61,10 +62,10 @@ namespace DigitalArtsAFAD
 
         void TriggerExit(GameObject go)
         {
-            if (!wasEntered || !onlyOnce)
+            if (!wasExited || !onlyOnce)
             {
                 onLeave.Invoke();
-                wasEntered = true;
+                wasExited = true;
             }
         }
     }
