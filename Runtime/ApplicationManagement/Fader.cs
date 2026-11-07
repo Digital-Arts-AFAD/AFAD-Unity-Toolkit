@@ -133,7 +133,7 @@ namespace DigitalArtsAFAD
 
         public void Fill()
         {
-            image.color = fadeInEnd;
+            image.color = fadeOutEnd;
         }
     }
 }
