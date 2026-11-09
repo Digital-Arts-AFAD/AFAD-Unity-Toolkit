@@ -12,18 +12,11 @@ namespace DigitalArtsAFAD
     /// Objects are spawned either manually by calling Spawn() method 
     /// or automatically after a random period of time defined by minInterval, maxInterval values.
     /// 
-    /// TODO:  Spawn inside collider area
     /// </summary>
     public class Spawner : MonoBehaviour
     {
         [Tooltip("Prefabs (or gameobjects) that spawned objects will be cloned from.")]
         public GameObject[] prefabs;
-
-        [Tooltip("Minimum period after which a random spawn event occurs.")]
-        public float minInterval = 0;
-
-        [Tooltip("Maximum period after which a random spawn event occurs.")]
-        public float maxInterval = 0;
 
         [Tooltip("Spawned objects are children of spawner gameobject unless parent is specified")]
         public Transform parent;
@@ -41,15 +34,6 @@ namespace DigitalArtsAFAD
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            ResetTimer();
-        }
-
-        void ResetTimer()
-        {
-            if (minInterval > 0 && maxInterval > 0 && minInterval <= maxInterval)
-            {
-                timer = Random.Range(minInterval, maxInterval);
-            }
         }
 
         // Update is called once per frame
@@ -80,7 +64,6 @@ namespace DigitalArtsAFAD
             {
                 GameObject go = prefabs[Random.Range(0, prefabs.Length)];
                 Spawn(go);
-                ResetTimer();
                 onSpawn.Invoke(go);
             }
         }
