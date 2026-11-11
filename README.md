@@ -44,5 +44,5 @@ Designed for visual artists and digital storytellers, the toolkit covers the mos
 Download the [latest .unitypackage from Releases](https://github.com/Digital-Arts-AFAD/AFAD-Unity-Toolkit/releases/latest) and import into your Unity project.
 
 ## Documentation
-Documentation for a previous generation of the toolkit: [AFAD Unity Package](https://vyuka.digitalneumenia.sk/afad-unity-package).  
+Documentation with video tutorials [AFAD Unity Toolkit GitBook](https://digital-arts.gitbook.io/afad-unity-toolkit/).  
 The older documentation is 90% consistent with the current toolkit. An updated documentation is in progress.
