@@ -9,6 +9,13 @@ namespace DigitalArtsAFAD
     /// </summary>
     public class Player3D : PlayerBase
     {
+        [Tooltip("GUI image displaying the interaction crosshair")]
+        public Image crosshair;
+        [Tooltip("Sprite asset while no interactable object is in focus")]
+        public Sprite crosshairPassive;
+        [Tooltip("Sprite asset when there is an interactable object in focus")]
+        public Sprite crosshairActive;
+
         [Header("Interaction in 3D")]
 
         [Tooltip("Component which handles player movement.\nWill be disabled when menu is open")]
@@ -17,14 +24,15 @@ namespace DigitalArtsAFAD
         public float interactionDistance = 4;
         [Tooltip("Physical strength of player, e.g. when throwing objects")]
         public float strength = 10;
-        [Tooltip("True if the objects hidden behind a collider should be interactable too.")]
+        [Tooltip("True if the objects hidden behind another collider (e.g. wall) should be interactable too.")]
         public bool interactWithOccluded = false;
-        [Tooltip("GUI image displaying the interaction crosshair")]
-        public Image crosshair;
-        [Tooltip("Sprite asset while no interactable object is in focus")]
-        public Sprite crosshairPassive;
-        [Tooltip("Sprite asset when there is an interactable object in focus")]
-        public Sprite crosshairActive;
+        [Tooltip("True if the colliders marked as triggers should be considered for interaction.")]
+        public bool interactWithTriggers = false;
+
+        [Tooltip("Define the layer for interactable objects. Default is everything.")]
+        public LayerMask interactableLayerMask = ~0;
+
+
 
         
         void Start()
@@ -73,6 +81,7 @@ namespace DigitalArtsAFAD
         protected override IInteractable FindInteractable()
         {
             IInteractable result = null;
+            QueryTriggerInteraction queryTriggerInteraction = interactWithTriggers ? QueryTriggerInteraction.Collide : QueryTriggerInteraction.Ignore;
 
             if ((Camera.main != null))
             {
@@ -80,7 +89,7 @@ namespace DigitalArtsAFAD
 
                 if (interactWithOccluded)
                 {
-                    RaycastHit[] hits = Physics.RaycastAll(ray, 2 * interactionDistance);
+                    RaycastHit[] hits = Physics.RaycastAll(ray, 2 * interactionDistance, interactableLayerMask, queryTriggerInteraction);
 
                     float minDistance = float.PositiveInfinity;
                     for (int i = 0; i < hits.Length; i++)
@@ -106,7 +115,7 @@ namespace DigitalArtsAFAD
                 }
                 else
                 {
-                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, interactableLayerMask, queryTriggerInteraction))
                     {
                         IInteractable interactable = hit.transform.gameObject.GetComponentInParent<IInteractable>();
                         if (interactable != null)
