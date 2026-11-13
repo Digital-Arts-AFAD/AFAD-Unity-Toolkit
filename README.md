@@ -26,6 +26,9 @@ Designed for visual artists and digital storytellers, the toolkit covers the mos
 - Level loading (both simple and additive)
 - Object spawner and destroyer
 - Collectible objects
+- Application management
+    - Exiting or reloading application
+    - Showing / hiding cursor    
 - Various utilities
     - Screen fader
     - Procedural rotator
