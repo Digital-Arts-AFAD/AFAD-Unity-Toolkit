@@ -9,6 +9,7 @@ namespace DigitalArtsAFAD
     {
         public float timer = 30;
 
+        [Space(5)]
         public UnityEvent OnIdleBegin;
         public UnityEvent OnIdleEnd;
 

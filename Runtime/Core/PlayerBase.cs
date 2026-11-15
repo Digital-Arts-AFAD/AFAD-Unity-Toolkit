@@ -37,6 +37,8 @@ namespace DigitalArtsAFAD
 
         protected ApplicationManager manager;
 
+        protected bool active = true;
+
         private InputAction interactAction;
         private InputAction menuAction;
 
@@ -48,12 +50,20 @@ namespace DigitalArtsAFAD
         /// <summary>
         /// Disable movement and interaction. E.g. when menu is open.
         /// </summary>
-        public abstract void Disable();
+        public virtual void Disable()
+        {
+            active = false;
+            events.OnPlayerDisabled.Invoke();
+        }
 
         /// <summary>
         /// Enable movement and interaction back after it's been disabled.
         /// </summary>
-        public abstract void Enable();
+        public virtual void Enable()
+        {
+            active = true;
+            events.OnPlayerEnabled.Invoke();
+        }
 
         private void Awake()
         {
@@ -107,6 +117,17 @@ namespace DigitalArtsAFAD
 
         protected virtual IInteractable FindInteractable()
         {
+            if (!active && AppManagerExists())
+            {
+                Modal m = manager.GetActiveModal();
+                if (m != null)
+                {
+                    Interactable im = m.GetComponent<Interactable>();
+                    if (im != null)
+                        return im;
+                }                
+            }
+
             return null;
         }
 
@@ -121,16 +142,19 @@ namespace DigitalArtsAFAD
 
         protected void OnMenu()
         {
-            // Find application manager on first invoke of menu. Attach menu show/hide handlers
+            if (AppManagerExists())
+            {
+                manager.ToggleMenu();
+            }
+        }
+
+        private bool AppManagerExists()
+        {
             if (manager == null)
             {
                 manager = FindAnyObjectByType<ApplicationManager>();
             }
-
-            if (manager != null)
-            {
-                manager.ToggleMenu();
-            }
+            return manager != null;
         }
 
         protected bool InteractableIsValid(IInteractable interactable)

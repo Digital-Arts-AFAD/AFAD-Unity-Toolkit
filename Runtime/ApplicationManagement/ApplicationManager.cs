@@ -88,7 +88,6 @@ namespace DigitalArtsAFAD
                 Vector2 dimensions = new Vector2(cursor.width, cursor.height);
                 Vector2 pivot = new Vector2(dimensions.x / 2, dimensions.y / 2);
                 Cursor.SetCursor(cursor, pivot, CursorMode.Auto);
-                HideCursor();
             }
         }
 
@@ -317,7 +316,6 @@ namespace DigitalArtsAFAD
             onModalShow.Invoke(m);
         }
 
-
         public void HideModal(Modal m)
         {
             HideCursor();
@@ -342,6 +340,11 @@ namespace DigitalArtsAFAD
                 Modal old = modalStack.Pop();
                 old.gameObject.SetActive(true);
             }
+        }
+
+        public Modal GetActiveModal()
+        {
+            return activeModal;
         }
     }
 }

@@ -31,13 +31,11 @@ namespace DigitalArtsAFAD
 
         [Tooltip("Define the layer for interactable objects. Default is everything.")]
         public LayerMask interactableLayerMask = ~0;
-
-
-
-        
+       
         void Start()
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Update()
@@ -60,26 +58,35 @@ namespace DigitalArtsAFAD
 
         public override void Disable()
         {
+            base.Disable();
+
+            crosshair.gameObject.SetActive(false);
+            actionMessage.gameObject.SetActive(false);
+
             if (motionController)
             {
                 motionController.enabled = false;
-                events.OnPlayerDisabled.Invoke();
-                crosshair.gameObject.SetActive(false);
-            }
+            }            
         }
 
         public override void Enable()
         {
+            base.Enable();
+
+            crosshair.gameObject.SetActive(true);
+            actionMessage.gameObject.SetActive(true);
+
             if (motionController)
             {
                 motionController.enabled = true;
-                events.OnPlayerEnabled.Invoke();
-                crosshair.gameObject.SetActive(true);
-            }
+            }            
         }
 
         protected override IInteractable FindInteractable()
         {
+            if (!active)
+                return base.FindInteractable();
+
             IInteractable result = null;
             QueryTriggerInteraction queryTriggerInteraction = interactWithTriggers ? QueryTriggerInteraction.Collide : QueryTriggerInteraction.Ignore;
 

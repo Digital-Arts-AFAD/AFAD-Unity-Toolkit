@@ -9,6 +9,7 @@ namespace DigitalArtsAFAD
     /// </summary>
     public class PlayerEvents : MonoBehaviour
     {
+        [Space(5)]
         [Tooltip("Triggered when player (movement, interaction) is disabled. E.g. when menu is open or a cutscene happens.")]
         public UnityEvent OnPlayerDisabled;
 
