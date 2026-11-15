@@ -14,6 +14,7 @@ using UnityEngine.InputSystem.UI;
 /// </summary>
 public class PointerEvents : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
+    [Space(5)]
     public UnityEvent<PointerEventData> onPointerClick;
     public UnityEvent<PointerEventData> onPointerEnter;
     public UnityEvent<PointerEventData> onPointerExit;
