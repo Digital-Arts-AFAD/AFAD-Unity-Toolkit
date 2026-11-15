@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace DigitalArtsAFAD
@@ -14,22 +16,20 @@ namespace DigitalArtsAFAD
         /// - Quitting the application
         /// - Scene loading/unloading
         /// - Main menu
+        /// - Modal windows
         /// </summary>
 
-        // TODO: Hide defaultScene in Inspector if sceneMoode is SIMPLE
-        [Header("Main menu:")]
-        [Space(5)]
-
         public GameObject mainMenu;
-        public bool stopTimeWhileMenuOpen = true;
 
-        [Space(10)]
-        public UnityEvent onMenuShow;
-        public UnityEvent onMenuHide;
+        [Tooltip("Assign a Fader object to fade in / fade out during scene transitions")]
+        public Fader fader;
 
+        public Texture2D cursor;
 
-        [Header("Scene loading:")]
-        [Space(5)]
+        public bool stopTimeOnModal = true;
+
+        public UnityEvent<Modal> onModalShow;
+        public UnityEvent<Modal> onModalHide;
 
         [Tooltip("Simple scene mode unloads existing scene when loading new scene.\n\nAdditive scene mode has one primary scene which never unloads and replaces only the secondary scene.")]
         public SceneMode sceneMode = SceneMode.SIMPLE;
@@ -37,14 +37,9 @@ namespace DigitalArtsAFAD
         [Tooltip("Name of the default secondary scene to be additively loaded when game starts. Leave blank if scene mode is simple.")]
         public string defaultScene = "";
 
-        [Tooltip("Assign a Fader object to fade in / fade out during scene transitions")]
-        public Fader fader;
-
-        [Space(5)]
         public GameObject[] disableObjectsDuringLoading;
         public GameObject[] enableObjectsDuringLoading;
 
-        [Space(10)]
         public UnityEvent onLoadingStarted;
         public UnityEvent onLoadingFinished;
 
@@ -72,8 +67,10 @@ namespace DigitalArtsAFAD
         CursorLockMode cursorLockstate;
 
         PlayerBase player;
-
         float oldTimeScale = 1;
+
+        Modal activeModal = null;
+        Stack<Modal> modalStack = new Stack<Modal>();
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -84,6 +81,14 @@ namespace DigitalArtsAFAD
             {
                 if (defaultScene != "")
                     LoadScene(defaultScene);
+            }
+
+            if (cursor != null)
+            {
+                Vector2 dimensions = new Vector2(cursor.width, cursor.height);
+                Vector2 pivot = new Vector2(dimensions.x / 2, dimensions.y / 2);
+                Cursor.SetCursor(cursor, pivot, CursorMode.Auto);
+                HideCursor();
             }
         }
 
@@ -246,15 +251,8 @@ namespace DigitalArtsAFAD
         {
             if (mainMenu)
             {
-                onMenuShow.Invoke();
                 mainMenu.SetActive(true);
-                menuVisible = true;
-                if (stopTimeWhileMenuOpen)
-                {
-                    oldTimeScale = Time.timeScale;
-                    Time.timeScale = 0;
-                }
-                ShowCursor();
+                menuVisible = true; 
             }
         }
 
@@ -262,14 +260,8 @@ namespace DigitalArtsAFAD
         {
             if (mainMenu)
             {
-                HideCursor();
                 menuVisible = false;
                 mainMenu.SetActive(false);
-                onMenuHide.Invoke();
-                if (stopTimeWhileMenuOpen)
-                {
-                    Time.timeScale = oldTimeScale;
-                }
             }
         }
 
@@ -284,9 +276,11 @@ namespace DigitalArtsAFAD
             return menuVisible;
         }
 
-
         public void ShowCursor()
         {
+            Vector3 screenPoint = Camera.main.WorldToScreenPoint(Camera.main.transform.position + Camera.main.transform.forward);
+            Mouse.current.WarpCursorPosition(screenPoint);
+
             cursorWasVisible = Cursor.visible;
             cursorLockstate = Cursor.lockState;
 
@@ -303,6 +297,51 @@ namespace DigitalArtsAFAD
         public string getScene()
         {
             return currentScene;
+        }
+
+        public void ShowModal(Modal m)
+        {
+            if (activeModal != null)
+            {
+                modalStack.Push(activeModal);
+                activeModal.gameObject.SetActive(false);
+            }
+            activeModal = m;
+            player.Disable();
+            ShowCursor();
+            if (stopTimeOnModal)
+            {
+                oldTimeScale = Time.timeScale;
+                Time.timeScale = 0;
+            }
+            onModalShow.Invoke(m);
+        }
+
+
+        public void HideModal(Modal m)
+        {
+            HideCursor();
+            player.Enable();
+            if (stopTimeOnModal)
+            {
+                Time.timeScale = oldTimeScale;
+            }
+
+            if (modalStack.Contains(m)) return;
+
+            if (activeModal == m)
+            {
+                activeModal = null;
+                onModalHide.Invoke(m);
+            }
+            else
+                Debug.LogError("Modal mismatch");
+
+            if (modalStack.Count > 0)
+            {
+                Modal old = modalStack.Pop();
+                old.gameObject.SetActive(true);
+            }
         }
     }
 }

@@ -125,11 +125,6 @@ namespace DigitalArtsAFAD
             if (manager == null)
             {
                 manager = FindAnyObjectByType<ApplicationManager>();
-                if (manager != null)
-                {
-                    manager.onMenuShow.AddListener(() => { this.Disable(); });
-                    manager.onMenuHide.AddListener(() => { this.Enable(); });
-                }
             }
 
             if (manager != null)

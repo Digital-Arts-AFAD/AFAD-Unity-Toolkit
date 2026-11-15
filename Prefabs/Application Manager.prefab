@@ -168,15 +168,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 7757617960774864876}
-  onMenuShow:
+  fader: {fileID: 1016764864617943818}
+  cursor: {fileID: 2800000, guid: 6da83d8b0901cca4193619d2fb8003a5, type: 3}
+  stopTimeOnModal: 1
+  onModalShow:
     m_PersistentCalls:
       m_Calls: []
-  onMenuHide:
+  onModalHide:
     m_PersistentCalls:
       m_Calls: []
   sceneMode: 0
   defaultScene: 
-  fader: {fileID: 1016764864617943818}
   disableObjectsDuringLoading: []
   enableObjectsDuringLoading: []
   onLoadingStarted:
@@ -1088,6 +1090,7 @@ GameObject:
   - component: {fileID: 2477925601837479419}
   - component: {fileID: 9117305819327863591}
   - component: {fileID: 8474064052871933630}
+  - component: {fileID: 3226909006987537449}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1179,6 +1182,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3226909006987537449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7757617960774864876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3d9a28263c6444bb58da4543b4e96b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DigitalArtsAFAD.ModalWindow
 --- !u!1 &8292981391863685177
 GameObject:
   m_ObjectHideFlags: 0
