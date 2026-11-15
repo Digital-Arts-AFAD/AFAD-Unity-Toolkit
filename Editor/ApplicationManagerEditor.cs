@@ -11,8 +11,6 @@ namespace DigitalArtsAFAD
         bool showModals = false;
         bool showSceneLoading = false;
 
-        SerializedProperty[] properties;
-
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
