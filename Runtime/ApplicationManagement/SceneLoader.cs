@@ -10,21 +10,11 @@ namespace DigitalArtsAFAD
     /// </summary>
     public class SceneLoader : MonoBehaviour
     {
-        public string sceneName = "";
-
         ApplicationManager manager;
 
         private void Start()
         {
             manager = FindAnyObjectByType<ApplicationManager>();
-        }
-
-        public void LoadScene()
-        {
-            if (sceneName != "")
-            {
-                LoadScene(sceneName);
-            }
         }
 
         public void LoadScene(string name)
@@ -41,7 +31,14 @@ namespace DigitalArtsAFAD
                 manager.Reload();
             else
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
+        public void FullReload()
+        {
+            if (manager != null)
+                manager.FullReload();
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
     }

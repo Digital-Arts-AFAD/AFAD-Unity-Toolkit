@@ -8,22 +8,14 @@ namespace DigitalArtsAFAD
     {
         [Space(5)]
         public bool startAutomatically = true;
-        [Header("Simple firing")]
-        [Space(5)]        
-
-        [Tooltip("Delay before the timer fires.")]
-        public float delay = 1f;
-
-        [Header("Repeated firing")]
-        [Space(5)]
-        public int repeatCount = 1;
-        public float endTime = 0;
-
-        [Header("Random delay")]
-        [Space(5)]
-        public float minDelay = 0f;
-        public float maxDelay = 0f;
         
+        [Tooltip("Delay before the timer fires.")]
+        public float interval = 1f;
+        public float randomIntervalMin = 0f;
+        public float randomIntervalMax = 0f;
+
+        public int tickCount = 1;
+        public float endTime = 0;
 
         [Space(10)]
         public UnityEvent onTick;
@@ -55,25 +47,25 @@ namespace DigitalArtsAFAD
                 {
                     End();
                 }
-                else if (value >= delay)
+                else if (value >= interval)
                 {
-                    Fire();
+                    Tick();
                 }
             }
         }
 
-        void Fire()
+        void Tick()
         {
             onTick.Invoke();
             counter++;
-            if (repeatCount > 0 && counter >= repeatCount)
+            if (tickCount > 0 && counter >= tickCount)
             {
                 End();
             }
             else
             {
                 value = 0;
-                RandomizeDelay();
+                RandomizeInterval();
             }
         }
 
@@ -83,10 +75,10 @@ namespace DigitalArtsAFAD
             onEnded.Invoke();
         }
 
-        void RandomizeDelay()
+        void RandomizeInterval()
         {
-            if (minDelay > 0 && maxDelay > 0 && minDelay < maxDelay)
-                delay = Random.Range(minDelay, maxDelay);
+            if (randomIntervalMin > 0 && randomIntervalMax > 0 && randomIntervalMin < randomIntervalMax)
+                interval = Random.Range(randomIntervalMin, randomIntervalMax);
         }
 
         public void StartTimer()
@@ -96,7 +88,7 @@ namespace DigitalArtsAFAD
                 value = 0;
                 counter = 0;
                 totalTime = 0;
-                RandomizeDelay();
+                RandomizeInterval();
                 running = true;
             }
         }
