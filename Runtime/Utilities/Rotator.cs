@@ -20,7 +20,7 @@ namespace DigitalArtsAFAD
         public bool startRandomized = false;
 
         [Tooltip("True if the object should be rotating automatically. Otherwise rotation needs to be turned on by script.")]
-        public bool startRotating = true;
+        public bool startAutomatically = true;
 
         bool rotating = false;
 
@@ -34,7 +34,7 @@ namespace DigitalArtsAFAD
                 if (speedY != 0) transform.Rotate(Vector3.up, Random.Range(0, 360));
             }
 
-            if (startRotating) StartRotating();
+            if (startAutomatically) StartRotating();
         }
 
         // Update is called once per frame

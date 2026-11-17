@@ -72,6 +72,8 @@ namespace DigitalArtsAFAD
         {
             GameObject spawned = Instantiate(go);
             spawned.transform.position = CalculatePosition();
+            spawned.transform.rotation = transform.rotation;
+
             if (parent == null)
             {
                 spawned.transform.SetParent(transform, true);
