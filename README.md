@@ -5,13 +5,16 @@ The toolkit was developed for the course Video games and Virtual Environments, a
 
 Designed for visual artists and digital storytellers, the toolkit covers the most frequent situations in interactive 3D virtual environments in Unity. The philosophy of the toolkit is to have a simple starting package for digital artists. It doesn't offer the complexity and richness of industry-grade game creator packages but it is much easier to learn and use.
 
-### Typical applications for the toolkit:
+## Toolkit documentation and tutorials
+[AFAD Unity Toolkit Documentation and Tutorials](https://digital-arts.gitbook.io/afad-unity-toolkit/).
+
+## Typical applications for the toolkit:
 - Walking simulators
 - Interactive experiences
 - Environmental storytelling
 - Simple narrative games
 
-### Not included in the toolkit:
+## Not included in the toolkit:
 - Dialogue system
 - Inventory system
 - Character controllers
@@ -19,21 +22,21 @@ Designed for visual artists and digital storytellers, the toolkit covers the mos
 ## Features
 
 - Interaction crosshair and action message
+- Switching between 3D interaction and UI interaction or modal interaction.
 - Components for area triggers, collision events, mouse events, video player events
 - Pickable and interactable objects
 - Switch for on/off actions
 - Timer for timed actions
 - Level loading (both simple and additive)
-- Object spawner and destroyer
-- Collectible objects
+- Object spawner
 - Application management
     - Exiting or reloading application
-    - Showing / hiding cursor    
+    - Showing / hiding cursor, custom cursor
+    - Freezing the game while UI windows are open
 - Various utilities
     - Screen fader
     - Procedural rotator
-    - Detection of inactivity (Idle timer)
-    - Player of random sounds
+    - Detection of inactivity (Idle timer)    
 
 ## Requirements
 - Unity 6
@@ -45,7 +48,3 @@ Designed for visual artists and digital storytellers, the toolkit covers the mos
 
 ## Installation
 Download the [latest .unitypackage from Releases](https://github.com/Digital-Arts-AFAD/AFAD-Unity-Toolkit/releases/latest) and import into your Unity project.
-
-## Documentation
-Documentation with video tutorials [AFAD Unity Toolkit GitBook](https://digital-arts.gitbook.io/afad-unity-toolkit/).  
-The older documentation is 90% consistent with the current toolkit. An updated documentation is in progress.
